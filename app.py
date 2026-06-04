@@ -12,7 +12,7 @@ st.set_page_config(
 
 # ---- LOGO Y ENCABEZADO ----
 # Reemplaza 'https://via.placeholder.com/150' por la URL real del logo de tu negocio
-LOGO_URL = "https://via.placeholder.com/150" 
+LOGO_URL = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
 
 # ---- BARRA LATERAL (INFORMACIÓN DEL ESTUDIANTE) ----
 with st.sidebar:
