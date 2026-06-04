@@ -16,7 +16,7 @@ st.set_page_config(
 # CONFIGURACIÓN DE ESTILOS LIMPIOS (SIN NINGÚN FONDO PERSONALIZADO)
 # ==============================================================================
 # Nota: Puedes cambiar la URL por el enlace directo de tu propio logo si lo requieres
-URL_LOGO = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=200&auto=format&fit=crop" 
+URL_LOGO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
 
 st.markdown("""
     <style>
