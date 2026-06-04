@@ -154,7 +154,7 @@ with tabs[1]:
         ax.axvline(x=10000, color="#00a2e8", linestyle="-", linewidth=2.5, label="Cali-Palmira")
         ax.axvline(x=18750, color="#a32cc4", linestyle="-", linewidth=2.5, label="Palmira - Tuluá")
 
-        # Formateo estético igual al de tu Excel
+        # Formateo estético igual al de tu imagen
         ax.set_title("Punto de Equilibrio", fontsize=16, pad=15, color="#595959")
         ax.set_xlim(-1000, 40000)
         ax.set_ylim(-50000, 1400000)
@@ -253,7 +253,7 @@ with tabs[4]:
     """)
 
 # ==========================================
-# PESTAÑA 6: MOTOR DE BALANCEO DE LÍNEAS (NOMBRES CORREGIDOS)
+# PESTAÑA 6: MOTOR DE BALANCEO DE LÍNEAS
 # ==========================================
 with tabs[5]:
     st.header("6. Ingeniería de Producción: Balanceo de Líneas de Empaque")
@@ -302,9 +302,10 @@ with tabs[5]:
         
     num_estaciones_reales = len(estaciones_asignadas)
     
+    # Cálculos matemáticos corregidos
     eficiencia = (suma_tiempos / (num_estaciones_reales * tiempo_ciclo)) * 100
     tiempo_ocio = (num_estaciones_reales * tiempo_ciclo) - suma_tiempos
-    retraso_balanceo = 100 - efficiency
+    retraso_balanceo = 100 - eficiencia
     
     st.subheader("Resultados del Balanceo Cuantitativo")
     
@@ -331,7 +332,7 @@ with tabs[5]:
     """)
 
 # ==========================================
-# PESTAÑA 7: CONCLUSIÓN GENERAL E INTEGRACIÓN (¡NUEVA!)
+# PESTAÑA 7: CONCLUSIÓN GENERAL E INTEGRACIÓN
 # ==========================================
 with tabs[6]:
     st.header("7. Conclusión General del Sistema de Operaciones")
