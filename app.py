@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
 
 # Configuración inicial de la página
@@ -13,45 +12,35 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# PERSONALIZACIÓN DE FONDO Y LOGO (DISEÑO VISUAL AVANZADO)
+# CONFIGURACIÓN DE ESTILOS LIMPIOS (LETRA OSCURA Y FONDO BLANCO ESTÁNDAR)
 # ==============================================================================
-# Nota: Puedes cambiar las URLs por los enlaces directos de tus propias imágenes
-URL_LOGO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
-URL_FONDO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/fondo.png"
+URL_LOGO = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=200&auto=format&fit=crop" 
 
-st.markdown(f"""
+st.markdown("""
     <style>
-    /* Fondo personalizado para toda la aplicación con opacidad para lectura clara */
-    .stApp {{
-        background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(245, 235, 224, 0.95)), 
-                    url("{URL_FONDO}");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }}
+    /* Títulos y textos estilizados con colores oscuros de alta legibilidad */
+    .main-title { font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }
+    .subtitle { font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }
+    .section-header { color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }
     
-    /* Títulos y textos estilizados */
-    .main-title {{ font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }}
-    .subtitle {{ font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }}
-    .section-header {{ color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
-    
-    /* Tarjetas decorativas para KPI */
-    .kpi-card {{
+    /* Tarjetas decorativas para KPI y Conclusiones */
+    .kpi-card {
         background-color: white;
-        padding: 20px;
+        padding: 22px;
         border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
         border-left: 5px solid #8B5A2B;
-        text-align: center;
-    }}
+        margin-bottom: 15px;
+    }
+    .kpi-card h3 { color: #4A3018 !important; margin-top: 0; }
+    .kpi-card p { color: #1a1a1a !important; text-align: justify; line-height: 1.5; font-size: 15px; }
     </style>
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SIDEBAR / NAVEGACIÓN
+# SIDEBAR / NAVEGACIÓN (CON TU LOGO)
 # ==============================================================================
 with st.sidebar:
-    # Desplegar el Logo de la Empresa en la parte superior del menú
     st.image(URL_LOGO, caption="☕ Café Artesanal CASAENZ", use_container_width=True)
     st.markdown("---")
     st.markdown("### 📋 Navegación del Proyecto")
@@ -59,12 +48,10 @@ with st.sidebar:
         "Selecciona la sección a exponer:",
         [
             "0. Introducción y Concepto",
-            "1. Factores Críticos de Localización",
-            "2. Técnicas de Localización",
-            "3. Red de Suministros y Modelo Matemático",
-            "4. Simulación en FlexSim",
-            "5. Distribución de Planta (WD)",
-            "6. Balanceo de Línea y Asignación de Puestos"
+            "1. Técnicas de Localización (Tus Ejercicios)",
+            "2. Red de Suministros y Distribución",
+            "3. Balanceo de Línea y Asignación de Puestos",
+            "🎓 Conclusiones Generales"
         ]
     )
     st.sidebar.markdown("---")
@@ -93,134 +80,88 @@ if opcion == "0. Introducción y Concepto":
     with col2:
         st.info("""
         ### 🏭 Objetivos Estratégicos de la Exposición
-        Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa:
-        * Localización macro y micro industrial.
-        * Modelación matemática de transporte.
-        * Distribución física y cálculo de esfuerzos de manejo de materiales ($W_D$).
-        * Balanceo óptimo de la línea de producción.
+        Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa basándose en los ejercicios matemáticos de modelación:
+        * Análisis de Punto de Equilibrio de Localización por Regiones.
+        * Determinación del Centro de Gravedad Óptimo (Cedi).
+        * Evaluación multicriterio de alternativas mediante Ponderación AHP.
         """)
 
 # ==============================================================================
-# PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
+# PÁGINA 1: TÉCNICAS DE LOCALIZACIÓN (TUS EJERCICIOS)
 # ==============================================================================
-elif opcion == "1. Factores Críticos de Localización":
-    st.header("📌 1. Factores Críticos de Localización")
-    st.write("Para localizar la planta y los centros de operaciones se evaluaron 6 factores críticos prioritarios:")
+elif opcion == "1. Técnicas de Localización (Tus Ejercicios)":
+    st.header("🧮 Técnicas de Localización y Análisis Multicriterio")
     
-    factores = {
-        "Proximidad a Proveedores": "Asegura la frescura del grano (café pergamino de Yotoco, Tuluá, Ginebra) y reduce costos de transporte de entrada.",
-        "Infraestructura Vial": "Conexión directa con los corredores logísticos principales del Valle del Cauca para mitigar tiempos muertos.",
-        "Cercanía al Mercado": "Acceso rápido a los principales centros de consumo urbano del departamento (Cali, Palmira, Buga).",
-        "Costos Operativos": "Evaluación del impacto financiero en arriendos, servicios públicos, impuestos locales y mano de obra.",
-        "Disponibilidad de Mano de Obra": "Acceso a personal operativo capacitado en técnicas de producción, tostión y empaque.",
-        "Seguridad y Entorno Comercial": "Mitigación de riesgos operacionales y fomento de alianzas estratégicas regionales."
-    }
+    tab1, tab2, tab3 = st.tabs(["Punto de Equilibrio (CVU)", "Centro de Gravedad", "Ubicación CEDI (AHP/Ponderación)"])
     
-    for f, desc in factores.items():
-        with st.expander(f"🔹 {f}"):
-            st.write(desc)
-
-# ==============================================================================
-# PÁGINA 2: TÉCNICAS DE LOCALIZACIÓN
-# ==============================================================================
-elif opcion == "2. Técnicas de Localización":
-    st.header("🧮 2. Técnicas de Localización Aplicadas")
-    
-    tab1, tab2, tab3 = st.tabs(["Costo-Volumen-Utilidad", "Calificación de Factores", "Centro de Gravedad"])
-    
+    # --- TAB 1: PUNTO DE EQUILIBRIO ---
     with tab1:
-        st.subheader("📊 Método Costo - Volumen - Utilidad (CVU)")
+        st.subheader("📊 Análisis de Costo-Volumen-Utilidad por Región")
         df_cvu = pd.DataFrame({
-            "Ciudad": ["Cali", "Palmira", "Buga"],
-            "Costos Fijos ($)": [4500000, 3200000, 2800000],
-            "Costo Variable Unitario ($)": [3500, 4200, 4800]
+            "Ubicación": ["Región A", "Región B", "Región C"],
+            "Costo Fijo (CF)": [100000, 200000, 350000],
+            "Costo Variable (cv)": [30, 20, 12]
         })
         st.dataframe(df_cvu, use_container_width=True)
-        q_slider = st.slider("Ajusta la cantidad de producción mensual (Q):", 1000, 15000, 10000, step=500)
         
-        df_cvu["Costo Total ($)"] = df_cvu["Costos Fijos ($)"] + (df_cvu["Costo Variable Unitario ($)"] * q_slider)
-        st.write(f"### Resultados para Q = {q_slider:,} unidades")
+        q_slider = st.slider("Ajusta el volumen proyectado de producción al año (Q):", 0, 25000, 15000, step=500)
+        df_cvu["Costo Total ($)"] = df_cvu["Costo Fijo (CF)"] + (df_cvu["Costo Variable (cv)"] * q_slider)
+        
+        st.write(f"### Resultados del Costo Total para Q = {q_slider:,} unidades")
         st.dataframe(df_cvu, use_container_width=True)
         
-        q_range = np.linspace(0, 15000, 100)
+        q_range = np.linspace(0, 25000, 100)
         fig_cvu = go.Figure()
-        for idx, row in df_cvu.iterrows():
-            fig_cvu.add_trace(go.Scatter(x=q_range, y=row["Costos Fijos ($)"] + row["Costo Variable Unitario ($)"] * q_range, mode='lines', name=row["Ciudad"]))
+        fig_cvu.add_trace(go.Scatter(x=q_range, y=100000 + 30 * q_range, mode='lines', name='Región A'))
+        fig_cvu.add_trace(go.Scatter(x=q_range, y=200000 + 20 * q_range, mode='lines', name='Región B'))
+        fig_cvu.add_trace(go.Scatter(x=q_range, y=350000 + 12 * q_range, mode='lines', name='Región C'))
         fig_cvu.add_vline(x=q_slider, line_dash="dash", line_color="red", annotation_text=f"Q actual")
-        fig_cvu.update_layout(title="Curvas de Costo Total por Localización", xaxis_title="Volumen (Q)", yaxis_title="Costo Total ($)")
+        fig_cvu.update_layout(title="Gráfico de Punto de Equilibrio de Localización", xaxis_title="Volumen Anual (Q)", yaxis_title="Costo Total ($)")
         st.plotly_chart(fig_cvu, use_container_width=True)
 
+    # --- TAB 2: CENTRO DE GRAVEDAD ---
     with tab2:
-        st.subheader("🎯 Método de Calificación de Factores (Factor Rating)")
-        peso = [0.25, 0.20, 0.25, 0.20, 0.10]
-        factores_labels = ["Cercanía a proveedores", "Infraestructura vial", "Cercanía al mercado", "Costos operativos", "Mano de obra"]
-        calif_cali = [8, 9, 10, 7, 9]
-        calif_palmira = [8, 8, 8, 8, 8]
-        calif_buga = [9, 7, 7, 9, 7]
-        
-        df_fr = pd.DataFrame({
-            "Factor Crítico": factores_labels,
-            "Peso (W)": peso,
-            "Cali": calif_cali,
-            "Palmira": calif_palmira,
-            "Buga": calif_buga
-        })
-        st.dataframe(df_fr, use_container_width=True)
-        
-        score_cali = sum(w*c for w, c in zip(peso, calif_cali))
-        score_palmira = sum(w*c for w, c in zip(peso, calif_palmira))
-        score_buga = sum(w*c for w, c in zip(peso, calif_buga))
-        
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Puntuación Cali", f"{score_cali:.2f}", delta="Ganador")
-        col2.metric("Puntuación Palmira", f"{score_palmira:.2f}")
-        col3.metric("Puntuación Buga", f"{score_buga:.2f}")
-
-    with tab3:
-        st.subheader("📍 Método del Centro de Gravedad")
+        st.subheader("📍 Método del Centro de Gravedad para Planta/CEDI")
         df_cg = pd.DataFrame({
-            "Ciudad Destino": ["Cali", "Palmira", "Buga"],
-            "Coordenada X": [100, 115, 120],
-            "Coordenada Y": [200, 215, 280],
-            "Demanda Vi (kg)": [5000, 4100, 3200],
-            "Costo fi ($)": [3500, 2800, 2100]
+            "Ciudad": ["Cali", "Tuluá", "Palmira"],
+            "Coordenada X (Km)": [90, 130, 170],
+            "Coordenada Y (Km)": [220, 240, 310],
+            "Demanda Vi (Ton/mes)": [6200, 4800, 3500],
+            "Costo Flete fi (Cop/Ton-Km)": [3600, 30000, 2500]
         })
         st.dataframe(df_cg, use_container_width=True)
-        x_opt, y_opt = 108.59, 219.83
-        st.metric("Coordenada Óptima Calculada", f"X: {x_opt}, Y: {y_opt}")
+        
+        x_opt, y_opt = 118.06, 243.66
+        costo_total_opt = 3354773746.00
+        
+        col1, col2 = st.columns(2)
+        col1.metric("Punto Óptimo Calculado (Centro de Gravedad)", f"X: {x_opt}, Y: {y_opt}")
+        col2.metric("Costo Mínimo de Transporte Total", f"$ {costo_total_opt:,.2f} COP")
+        
+        fig_cg = go.Figure()
+        fig_cg.add_trace(go.Scatter(x=df_cg["Coordenada X (Km)"], y=df_cg["Coordenada Y (Km)"], mode='markers+text', text=df_cg["Ciudad"], textposition="top center", marker=dict(size=12, color='brown'), name="Ciudades"))
+        fig_cg.add_trace(go.Scatter(x=[x_opt], y=[y_opt], mode='markers+text', text=["CEDI IDEAL"], textposition="bottom center", marker=dict(size=15, color='red', symbol='star'), name="Cedi Ideal"))
+        fig_cg.update_layout(title="Mapa de Coordenadas de Localización del CEDI", xaxis_title="Eje X (Km)", yaxis_title="Eje Y (Km)")
+        st.plotly_chart(fig_cg, use_container_width=True)
+
+    # --- TAB 3: MODELO MULTICRITERIO AHP ---
+    with tab3:
+        st.subheader("🏆 Evaluación de Distribución/Ubicación de Cedi mediante AHP")
+        df_ahp = pd.DataFrame({
+            "Alternativa de Distribución": ["A1 (Célula en U)", "A2 (Lineal)", "A3 (Por Proceso)"],
+            "Costo de Materia Prima": [0.2014, 0.6479, 0.3395],
+            "Flexibilidad Operativa": [0.6479, 0.2014, 0.4545],
+            "Prioridad Global Ponderada": ["64.79 %", "20.14 %", "33.95 %"]
+        })
+        st.dataframe(df_ahp, use_container_width=True)
 
 # ==============================================================================
-# PÁGINA 3: RED DE SUMINISTROS
+# PÁGINA 2: RED DE SUMINISTROS Y DISTRIBUCIÓN
 # ==============================================================================
-elif opcion == "3. Red de Suministros y Modelo Matemático":
-    st.header("🌐 3. Diseño de la Red de Suministros")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("### 🌾 Oferta de Proveedores")
-        st.table(pd.DataFrame({"Proveedor": ["Yotoco", "Tuluá", "Ginebra"], "Oferta (kg)": [700, 500, 400]}))
-    with col2:
-        st.markdown("### 🏪 Demanda del Mercado")
-        st.table(pd.DataFrame({"Destino": ["Cali", "Palmira", "Buga", "Tuluá"], "Demanda (kg)": [400, 500, 300, 400]}))
-
-# ==============================================================================
-# PÁGINA 4: SIMULACIÓN EN FLEXSIM
-# ==============================================================================
-elif opcion == "4. Simulación en FlexSim":
-    st.header("🏭 4. Modelación y Simulación en FlexSim")
-    st.info("💡 Usa esta sección como soporte visual mientras proyectas el archivo de FlexSim real en tu clase.")
-    st.markdown("""
-    * **Distribución Adoptada:** Por Producto / En Línea de Flujo Continuo.
-    * **Flujo del Simulador:** Source (Café Pergamino) ➔ Queues (Almacenamiento temporal) ➔ Processors (Tostadora, Molino, Selladora) ➔ Sink (Despacho final).
-    """)
-    st.progress(100)
-
-# ==============================================================================
-# PÁGINA 5: DISTRIBUCIÓN DE PLANTA
-# ==============================================================================
-elif opcion == "5. Distribución de Planta (WD)":
-    st.header("📐 5. Diseño Espacial y Factor Carga-Distancia ($W_D$)")
+elif opcion == "2. Red de Suministros y Distribución":
+    st.header("🌐 Red de Suministros y Manejo de Materiales")
     df_wd = pd.DataFrame({
-        "Ruta (Flujo)": ["A - C (Recepción a Stock)", "C - D (Stock a Tostión)", "D - E (Tostión a Empaque)", "E - F (Empaque a Listo)", "F - G (Listo a Despacho)"],
+        "Ruta (Flujo Interno)": ["A - C (Recepción a Stock)", "C - D (Stock a Tostión)", "D - E (Tostión a Empaque)", "E - F (Empaque a Listo)", "F - G (Listo a Despacho)"],
         "Distancia D_i (m)": [8, 12, 6, 5, 10],
         "Carga W_i (kg/sem)": [500, 500, 480, 480, 480]
     })
@@ -229,98 +170,77 @@ elif opcion == "5. Distribución de Planta (WD)":
     st.metric("Factor WD Total Semanal", f"{df_wd['Esfuerzo WD (kg·m)'].sum():,} kg·m/semana")
 
 # ==============================================================================
-# PÁGINA 6: BALANCEO DE LÍNEA Y ASIGNACIÓN (SITUACIÓN RESUELTA)
+# PÁGINA 3: BALANCEO DE LÍNEA Y ASIGNACIÓN
 # ==============================================================================
-elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
-    st.header("⚡ 6. Ingeniería de Métodos: Balanceo de Líneas de Producción")
-    
-    st.markdown("""
-    Para responder con rigor al requerimiento académico, se estructuró un análisis completo de balanceo para una línea de producción dedicada al empaque de **Café de 500g**.
-    
-    ### 📊 Parámetros de Entrada del Sistema
-    * **Jornada Laboral Única:** 8 horas/día = 480 minutos/día = **28,800 segundos/día**.
-    * **Tasa de Producción Deseada ($R$):** **320 unidades/día**.
-    * **Tiempo de Ciclo Máximo ($T_c$):** """)
-    st.latex(r"T_c = \frac{\text{Tiempo Disponible}}{\text{Tasa de Producción}} = \frac{28800 \text{ seg}}{320 \text{ und}} = 90 \text{ segundos/unidad}")
+elif opcion == "3. Balanceo de Línea y Asignación de Puestos":
+    st.header("⚡ Ingeniería de Métodos: Balanceo de Línea")
+    st.markdown("### Parámetros de Entrada de la Línea de Empaque (Café de 500g)")
+    st.markdown("* **Jornada Laboral:** 8 horas/día = 28,800 segundos/día.\n* **Tasa de Producción Deseada:** 320 unidades/día.")
+    st.latex(r"T_c = \frac{28800 \text{ seg}}{320 \text{ und}} = 90 \text{ segundos/unidad}")
 
-    # Tabla de Tiempos y Precedencias Reales
-    st.subheader("📋 1. Análisis de Precedencias y Tiempos de Tarea")
     df_tareas = pd.DataFrame({
         "Tarea": ["A", "B", "C", "D", "E", "F", "G"],
-        "Descripción de la Operación": [
-            "Recepción, pesado y limpieza del grano verde",
-            "Tostión artesanal (Operación Crítica)",
-            "Enfriamiento controlado en bandeja",
-            "Molienda fina/media automatizada",
-            "Dosificación exacta en báscula (500g)",
-            "Sellado térmico y fechado de la bolsa",
-            "Etiquetado manual e inspección de calidad"
-        ],
-        "Tiempo (seg)": [40, 85, 30, 50, 25, 35, 20],
-        "Precedencia": ["-", "A", "B", "C", "D", "E", "F"]
+        "Operación": ["Recepción y limpieza", "Tostión artesanal", "Enfriamiento controlado", "Molienda automatizada", "Dosificación exacta", "Sellado térmico", "Etiquetado manual"],
+        "Tiempo (seg)": [40, 85, 30, 50, 25, 35, 20]
     })
     st.dataframe(df_tareas, use_container_width=True)
     
-    tiempo_total_operacion = df_tareas["Tiempo (seg)"].sum()
-    
-    # Cálculos Teóricos de Ingeniería
-    min_teorico = int(np.ceil(tiempo_total_operacion / 90))
-    
-    # Asignación Heurística de Puestos Realizada (Regla de Mayor Tiempo de Tarea)
-    st.subheader("🛠️ 2. Diseño Estructural de los Puestos de Trabajo (Asignación Óptima)")
-    st.write("Aplicando las restricciones de precedencia y cuidando no exceder el $T_c = 90$ segundos por puesto, la configuración ideal es:")
-    
     df_puestos = pd.DataFrame({
-        "Estación (Puesto)": ["Puesto 1", "Puesto 2", "Puesto 3", "Puesto 4"],
-        "Tareas Asignadas": ["A + C (Pesado + Enfriamiento)", "B (Tostión - Cuello de Botella)", "D + E (Molienda + Dosificación)", "F + G (Sellado + Etiquetado)"],
-        "Tiempo de Ciclo Real (seg)": [40 + 30, 85, 50 + 25, 35 + 20],
+        "Estación": ["Puesto 1", "Puesto 2", "Puesto 3", "Puesto 4"],
+        "Tareas": ["A + C", "B (Cuello de botella)", "D + E", "F + G"],
+        "Tiempo Real (seg)": [70, 85, 75, 55],
+        "Tiempo de Ocio (seg)": [20, 5, 15, 35]
     })
-    df_puestos["Tiempo de Ocio (seg)"] = 90 - df_puestos["Tiempo de Ciclo Real (seg)"]
     st.dataframe(df_puestos, use_container_width=True)
     
-    # Indicadores de Desempeño Económico-Operativo
-    st.subheader("📈 3. Indicadores de Eficiencia del Balanceo")
-    
-    n_estaciones = len(df_puestos)
-    eficiencia = (tiempo_total_operacion / (n_estaciones * 90)) * 100
-    retraso_balanceo = 100 - eficiencia
-    tiempo_ocio_total = df_puestos["Tiempo de Ocio (seg)"].sum()
-    
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Mínimo Teórico de Operarios", f"{min_teorico} operarios")
-    with col2:
-        st.metric("Eficiencia Global de Línea", f"{eficiencia:.2f} %")
-    with col3:
-        st.metric("Retraso de Balanceo", f"{retraso_balanceo:.2f} %")
-    with col4:
-        st.metric("Tiempo Muerto Total por Unidad", f"{tiempo_ocio_total} seg")
-
-    # Gráfico interactivo de balance de cargas
     fig_linea = go.Figure()
-    fig_linea.add_trace(go.Bar(
-        x=df_puestos["Estación (Puesto)"],
-        y=df_puestos["Tiempo de Ciclo Real (seg)"],
-        name="Tiempo Utilizado",
-        marker_color='#5C3A21'
-    ))
-    fig_linea.add_trace(go.Bar(
-        x=df_puestos["Estación (Puesto)"],
-        y=df_puestos["Tiempo de Ocio (seg)"],
-        name="Tiempo Muerto (Ocio)",
-        marker_color='#D4A373'
-    ))
-    fig_linea.add_hline(y=90, line_dash="dash", line_color="red", annotation_text="Límite del Ciclo (90 seg)")
-    fig_linea.update_layout(
-        title="Distribución de la Carga de Trabajo por Puesto de Operario",
-        barmode='stack',
-        xaxis_title="Puestos de Trabajo",
-        yaxis_title="Segundos"
-    )
+    fig_linea.add_trace(go.Bar(x=df_puestos["Estación"], y=df_puestos["Tiempo Real (seg)"], name="Tiempo Productivo", marker_color='#5C3A21'))
+    fig_linea.add_trace(go.Bar(x=df_puestos["Estación"], y=df_puestos["Tiempo de Ocio (seg)"], name="Tiempo de Ocio", marker_color='#D4A373'))
+    fig_linea.add_hline(y=90, line_dash="dash", line_color="red", annotation_text="Límite Ciclo (90s)")
+    fig_linea.update_layout(barmode='stack', title="Carga de Trabajo por Operario vs Tiempo de Ciclo Máximo")
     st.plotly_chart(fig_linea, use_container_width=True)
+
+# ==============================================================================
+# PÁGINA 4: CONCLUSIONES GENERALES (SECCIÓN NUEVA AGREGADA)
+# ==============================================================================
+elif opcion == "🎓 Conclusiones Generales":
+    st.markdown('<p class="main-title">Conclusiones del Análisis de Ingeniería</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Sustentación de Decisiones Basadas en Datos Matemáticos</p>', unsafe_allow_html=True)
     
-    st.success("""
-    💡 **Conclusión del Balanceo:** La línea quedó balanceada con **4 estaciones** de trabajo estables. 
-    El **Puesto 2 (Tostión)** es el cuello de botella físico del sistema productivo con 85 segundos. 
-    Contamos con una excelente eficiencia operativa del **79.17%**, minimizando costos de mano de obra ocio.
-    """)
+    st.markdown("""
+    <div class="kpi-card">
+        <h3>📊 1. Optimización Financiera (Punto de Equilibrio)</h3>
+        <p>
+            El análisis Costo-Volumen-Utilidad determinó con precisión que el volumen de producción proyectado anual 
+            dictamina de manera directa la mejor macro-localización geográfica. Para el escenario base de 15,000 unidades anuales, 
+            la <b>Región B</b> representa la alternativa óptima con un costo total mínimo de $500,000, superando los sobrecostos variables 
+            de la Región A y mitigando los elevados costos fijos de la Región C.
+        </p>
+    </div>
+    
+    <div class="kpi-card">
+        <h3>📍 2. Eficiencia Logística y de Transporte (Centro de Gravedad)</h3>
+        <p>
+            Al evaluar el peso de la demanda y el impacto tarifario de los fletes para Cali, Tuluá y Palmira, el modelo matemático localiza 
+            el Centro de Distribución (CEDI) ideal en las coordenadas <b>X: 118.06, Y: 243.66</b>. Ubicar la infraestructura logística en este 
+            punto estratégico minimiza el gasto en transporte a un costo óptimo total de <b>$3,354,773,746.00 COP</b> mensuales, contrarrestando la criticidad del flete en Tuluá.
+        </p>
+    </div>
+    
+    <div class="kpi-card">
+        <h3>🏆 3. Diseño del Flujo de Planta (Ponderación Multicriterio AHP)</h3>
+        <p>
+            La matriz de priorización analítica (AHP) resolvió que los criterios de flexibilidad operativa y seguridad del operario superaban la variable estricta de costo inicial. 
+            Con una prioridad global dominante del <b>64.79%</b>, la configuración de la distribución física en <b>A1 (Célula en U)</b> se consolida como el diseño ganador para los flujos internos del Cedi, asegurando un sistema adaptable y esbelto.
+        </p>
+    </div>
+    
+    <div class="kpi-card">
+        <h3>⚡ 4. Productividad y Balanceo Operativo de Línea</h3>
+        <p>
+            Con una jornada laboral de 8 horas y un requerimiento de 320 unidades diarias, se estableció un tiempo de ciclo estricto de 90 segundos. 
+            La distribución balanceada en 4 estaciones de trabajo alcanza una elevada eficiencia global del <b>79.17%</b>, identificando la operación de 
+            <b>Tostión (Puesto 2)</b> como el cuello de botella físico del proceso productivo con 85 segundos utilizados, sobre el cual se deben enfocar los esfuerzos de control de calidad.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
