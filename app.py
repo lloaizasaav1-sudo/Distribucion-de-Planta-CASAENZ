@@ -13,11 +13,11 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# PERSONALIZACIÓN DE FONDO Y LOGO (DISEÑO VISUAL AVANZADO)
+# PERSONALIZACIÓN LOGO (DISEÑO VISUAL AVANZADO)
 # ==============================================================================
 # Nota: Puedes cambiar las URLs por los enlaces directos de tus propias imágenes
 URL_LOGO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
-
+URL_FONDO = "https://https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/fondo.png"
 
 st.markdown(f"""
     <style>
@@ -31,9 +31,9 @@ st.markdown(f"""
     }}
     
     /* Títulos y textos estilizados */
-    .main-title {{ font-size:42px !important; font-weight: bold; color: #000000; text-align: center; margin-bottom: 5px; }}
-    .subtitle {{ font-size:20px !important; text-align: center; color: #000000; margin-bottom: 30px; }}
-    .section-header {{ color: #000000; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
+    .main-title {{ font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }}
+    .subtitle {{ font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }}
+    .section-header {{ color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
     
     /* Tarjetas decorativas para KPI */
     .kpi-card {{
@@ -65,6 +65,8 @@ with st.sidebar:
             "4. Simulación en FlexSim",
             "5. Distribución de Planta (WD)",
             "6. Balanceo de Línea y Asignación de Puestos"
+            "7. Conclusión"
+            
         ]
     )
     st.sidebar.markdown("---")
