@@ -1,4 +1,46 @@
-# --- SECCIÓN: PREGUNTA 1 ---
+# 3. MENÚ DE NAVEGACIÓN LATERAL
+st.sidebar.markdown("# ☕ CASAENZ")
+st.sidebar.markdown("### Distribución de Planta")
+st.sidebar.markdown("---")
+
+opcion = st.sidebar.radio(
+    "Seleccione la Sección a Exponer:",
+    [
+        "Inicio / Presentación",
+        "1. Factores Críticos",
+        "2. Técnicas de Localización",
+        "3. Red de Suministro",
+        "4. Simulación FlexSim",
+        "5. Distribución y Balanceo",
+        "Conclusiones"
+    ]
+)
+
+# --- PÁGINA: INICIO (ESTE ES EL IF QUE DEBE IR PRIMERO) ---
+if opcion == "Inicio / Presentación":
+    st.title("☕ Proyecto Integrador: Diseño y Distribución de Planta")
+    st.subheader("Caso de Estudio: Café Artesanal CASAENZ")
+    st.markdown("---")
+    
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        try:
+            st.image("assets/logo.png", use_container_width=True)
+        except:
+            st.info("💡 Coloca tu logo en `assets/logo.png` para visualizarlo aquí.")
+            
+    with col2:
+        st.markdown("""
+        ### **Ficha Técnico de la Sustentación**
+        * **Institución:** Corporación Universitaria Minuto de Dios - UNIMINUTO
+        * **Programa:** Ingeniería Industrial
+        * **Autora:** Laura Juliana Loaiza Saavedra (ID: 428429)
+        
+        ### **Propósito Ejecutivo**
+        Esta aplicación interactiva funciona como un **Dashboard de Decisiones Estratégicas** para sustentar la viabilidad técnica, operativa y logística del procesamiento y empaque de café premium en el departamento del Valle del Cauca.
+        """)
+
+# --- PÁGINA: PREGUNTA 1 (AHORA SÍ EL ELIF SE CONECTA CORRECTAMENTE) ---
 elif opcion == "1. Factores Críticos":
     st.header("1. Factores Críticos de Localización de Plantas")
     st.markdown("Definición cualitativa y cuantitativa de los criterios ponderados para los centros de operaciones.")
@@ -21,7 +63,7 @@ elif opcion == "1. Factores Críticos":
     }
     df_f = pd.DataFrame(factores)
     
-    # Corrección de columnas y alineación estricta de bloques
+    # Estricta alineación de columnas
     col1, col2 = st.columns([4, 5])
     with col1:
         st.write("### Matriz de Priorización")
