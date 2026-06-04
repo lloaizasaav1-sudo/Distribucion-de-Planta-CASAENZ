@@ -13,11 +13,11 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# PERSONALIZACIÓN LOGO (DISEÑO VISUAL AVANZADO)
+# PERSONALIZACIÓN DE FONDO Y LOGO (DISEÑO VISUAL AVANZADO)
 # ==============================================================================
 # Nota: Puedes cambiar las URLs por los enlaces directos de tus propias imágenes
 URL_LOGO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
-URL_FONDO = "https://https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/fondo.png"
+URL_FONDO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/fondo.png"
 
 st.markdown(f"""
     <style>
@@ -65,8 +65,6 @@ with st.sidebar:
             "4. Simulación en FlexSim",
             "5. Distribución de Planta (WD)",
             "6. Balanceo de Línea y Asignación de Puestos"
-            "7. Conclusión"
-            
         ]
     )
     st.sidebar.markdown("---")
@@ -92,6 +90,15 @@ if opcion == "0. Introducción y Concepto":
         Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.
         """)
     
+    with col2:
+        st.info("""
+        ### 🏭 Objetivos Estratégicos de la Exposición
+        Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa:
+        * Localización macro y micro industrial.
+        * Modelación matemática de transporte.
+        * Distribución física y cálculo de esfuerzos de manejo de materiales ($W_D$).
+        * Balanceo óptimo de la línea de producción.
+        """)
 
 # ==============================================================================
 # PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
@@ -317,32 +324,3 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     El **Puesto 2 (Tostión)** es el cuello de botella físico del sistema productivo con 85 segundos. 
     Contamos con una excelente eficiencia operativa del **79.17%**, minimizando costos de mano de obra ocio.
     """)
-    
-    # ==============================================================================
-# PÁGINA: CONCLUSIONES GENERALES DEL PROYECTO
-# ==============================================================================
-elif opcion == "🎓 Conclusiones Generales":
-    st.header("🎓 Conclusiones Generales del Proyecto Integrador")
-    st.write("Cierre estratégico y académico sobre las decisiones de diseño para **Café Artesanal CASAENZ**:")
-    
-    st.markdown("""
-    <div class="kpi-card">
-        <h3 style='color: #000000; margin-top:0;'>📐 Perspectiva de la Ingeniería Industrial</h3>
-        <p style='color: #000000; text-align: justify; line-height: 1.6;'>
-            El proyecto evidencia que las decisiones relacionadas con la localización, distribución de planta y diseño de operaciones 
-            tienen un impacto directo sobre los costos, la productividad, el nivel de servicio y la competitividad empresarial. 
-            La integración de herramientas de análisis, modelación matemática y simulación permitió desarrollar una propuesta técnicamente viable 
-            para Café Artesanal CASAENZ, alineada con criterios de eficiencia operativa, sostenibilidad logística y crecimiento empresarial.
-        </p>
-    </div>
-    
-    <div class="kpi-card" style="border-left: 5px solid #D4A373;">
-        <h3 style='color: #000000; margin-top:0;'>🚀 Viabilidad del Negocio y Soportes Futuros</h3>
-        <p style='color: #000000; text-align: justify; line-height: 1.6;'>
-            Finalmente, se concluye que la configuración propuesta para la planta y la red de suministro de Café Artesanal CASAENZ constituye una alternativa adecuada para 
-            soportar el desarrollo y expansión del negocio, proporcionando una base sólida para futuras decisiones relacionadas con la capacidad productiva, 
-            distribución logística y optimización de procesos. La aplicación de metodologías propias de la Ingeniería Industrial permitió transformar 
-            información en decisiones estratégicas, demostrando la importancia de la planeación y el análisis técnico en el diseño de sistemas productivos modernos.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
