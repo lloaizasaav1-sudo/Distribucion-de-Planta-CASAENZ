@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-# 1. CONFIGURACIÓN DE LA PÁGINA (SIEMPRE DEBE IR AL PRINCIPIO)
+# 1. CONFIGURACIÓN DE LA PÁGINA
 st.set_page_config(
     page_title="CASAENZ - Dashboard Ejecutivo",
     page_icon="☕",
@@ -138,114 +138,4 @@ elif opcion == "2. Técnicas de Localización":
     st.header("2. Técnicas Cuantitativas de Localización")
     st.markdown("Resultados de la aplicación de los métodos de Factores Ponderados, Centro de Gravedad y Análisis CVU.")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric(
-            label="📍 Ubicación de la Planta de Fabricación", 
-            value="Cali", 
-            help="Elegida por el método de factores ponderados gracias a su infraestructura y disponibilidad de servicios."
-        )
-    with col2:
-        st.metric(
-            label="🚚 Ubicación del Centro de Distribución (CD)", 
-            value="Palmira", 
-            help="Punto óptimo obtenido mediante el análisis de Centro de Gravedad para minimizar distancias hacia el mercado del Valle."
-        )
-        
-    st.write("### Matriz de Posicionamiento Geográfico Regional")
-    st.markdown("Representación del plano cartesiano de gravedad basado en las distancias e índices de demanda del Valle del Cauca:")
-    
-    coordenadas = pd.DataFrame({
-        'Nodo Logístico': ['Cali', 'Palmira', 'Buga', 'Tuluá', 'Yotoco', 'Ginebra'],
-        'Eje X (Lat)': [3.4516, 3.5394, 3.9009, 4.0847, 3.8625, 3.7258],
-        'Eje Y (Lon)': [-76.5320, -76.3036, -76.2978, -76.1986, -76.3853, -76.2662],
-        'Clasificación': ['Planta de Fabricación', 'Centro de Distribución (CD)', 'Punto de Demanda', 'Punto de Demanda', 'Origen Materia Prima', 'Origen Materia Prima']
-    })
-    
-    fig_geo = px.scatter(
-        coordenadas, x='Eje Y (Lon)', y='Eje X (Lat)', color='Clasificación', text='Nodo Logístico',
-        color_discrete_map={
-            'Planta de Fabricación': '#8C1D40', 
-            'Centro de Distribución (CD)': '#1E3F20', 
-            'Punto de Demanda': '#D4AF37', 
-            'Origen Materia Prima': '#A3B899'
-        }
-    )
-    fig_geo.update_traces(textposition='top center', marker=dict(size=14, line=dict(width=1, color='DarkSlateGrey')))
-    st.plotly_chart(fig_geo, use_container_width=True)
-
-# --- PÁGINA: PREGUNTA 3 ---
-elif opcion == "3. Red de Suministro":
-    st.header("3. Diseño de la Red de Suministros")
-    st.markdown("Estructuración del modelo matemático de optimización lineal de transporte.")
-    
-    st.write("### Formulación del Modelo Matemático")
-    st.markdown("El modelo busca la **minimización global de los costos logísticos de transporte** entre los centros de suministro, transformación y consumo:")
-    
-    st.latex(r"Min \quad Z = \sum_{i=1}^{m} \sum_{j=1}^{n} C_{ij} X_{ij}")
-    
-    st.markdown("**Sujeto a las siguientes restricciones de ingeniería:**")
-    st.latex(r"\sum_{j=1}^{n} X_{ij} \le Capacidad_{i} \quad \forall i \quad \text{(Restricción de Capacidad de Fincas)}")
-    st.latex(r"\sum_{i=1}^{m} X_{ij} = Demanda_{j} \quad \forall j \quad \text{(Restricción de Satisfacción del Cliente)}")
-    st.latex(r"X_{ij} \ge 0 \quad \text{(Garantía de No Negatividad de Flujos)}")
-    
-    st.write("### Estructura de Flujo Físico")
-    st.code("""
-    [ Proveedores de Grano ]                [ Centro de Transformación ]            [ Nodo Logístico ]            [ Mercado Final ]
-       - Yotoco (Café MP)   ───┐
-       - Tuluá (Café MP)    ───┼───────►    PLANTA DE FABRICACIÓN    ───────►      CENTRO DE       ───────►   Consumidores Valle
-       - Ginebra (Café MP)  ───┘                    (Cali)                      DISTRIBUCIÓN (Palmira)
-    """, language="text")
-
-# --- PÁGINA: PREGUNTA 4 ---
-elif opcion == "4. Simulación FlexSim":
-    st.header("4. Simulación Dinámica de Operaciones de Piso")
-    st.markdown("Validación del comportamiento físico del sistema productivo ante variaciones de la demanda.")
-    
-    col1, col2 = st.columns([3, 2])
-    with col1:
-        st.write("### Representación en FlexSim de Eventos Discretos")
-        try:
-            st.image("assets/flexsim_1.png", caption="Modelación en 3D de las estaciones de procesamiento CASAENZ", use_container_width=True)
-        except:
-            st.warning("Para mostrar la simulación en el dashboard, sube tu captura de pantalla a la ruta: `assets/flexsim_1.png`")
-            
-        try:
-            with open("assets/flexsim.mp4", "rb") as v_file:
-                st.video(v_file.read())
-        except:
-            st.info("💡 Nota: Si tienes un video en formato `.mp4` de tu simulación corriendo en FlexSim, puedes guardarlo como `assets/flexsim.mp4` para reproducirlo aquí.")
-            
-    with col2:
-        st.write("### Indicadores de Desempeño Operativo (KPIs)")
-        st.metric(label="📊 Eficiencia de Utilización de Maquinaria", value="85.20 %")
-        st.metric(label="📦 Rendimiento de Producción (Throughput)", value="320 Bolsas / Día")
-        st.metric(label="⏳ Tiempo Promedio de Permanencia en Cola", value="42 segundos")
-        
-        st.info("""
-        **Tipo de Distribución Empleada:**
-        Se seleccionó una **Distribución por Producto (Línea de Flujo)**. El análisis de simulación demostró que esta configuración lineal optimiza el paso entre Tostión, Molienda y Empaque, evitando cuellos de botella por acumulación de Inventario en Proceso (WIP).
-        """)
-
-# --- PÁGINA: PREGUNTA 5 ---
-elif opcion == "5. Distribución y Balanceo":
-    st.header("5. Distribución de Planta y Balanceo Analítico de Línea")
-    st.markdown("Detalle técnico de ingeniería para los recorridos, cargas y balanceo secuencial de estaciones.")
-    
-    pestana1, pestana2, pestana3 = st.tabs(["📐 Layout y Carga-Distancia", "⚙️ Balanceo Analítico", "👥 Asignación de Puestos"])
-    
-    with pestana1:
-        st.write("### Planos Técnicos del Proceso")
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown("#### Plano de Bloques Industrial")
-            try: st.image("assets/plano_bloques.png", use_container_width=True)
-            except: st.error("Falta cargar el archivo en: `assets/plano_bloques.png`")
-        with c2:
-            st.markdown("#### Diagrama de Hilos Metodológico")
-            try: st.image("assets/diagrama_hilos.png", use_container_width=True)
-            except: st.error("Falta cargar el archivo en: `assets/diagrama_hilos.png`")
-            
-        st.write("### Modelo de Minimización de Recorridos")
-        st.latex(r"WD = \sum_{i=1}^{M} \sum_{j=1}^{M} W_{ij} D_{ij}")
-        st.
+    col1,
