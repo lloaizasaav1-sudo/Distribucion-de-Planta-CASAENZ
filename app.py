@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 st.set_page_config(
     page_title="Proyecto Integrador - Café CASAENZ",
     page_icon="☕",
-    layout="wide",
+    layout="black",
     initial_sidebar_state="expanded"
 )
 
