@@ -13,14 +13,12 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# ⚠️ CONFIGURACIÓN DE TUS IMÁGENES DESDE GITHUB
+# 🛠️ CONFIGURACIÓN AUTOMÁTICA DE IMÁGENES DESDE TU REPOSITORIO DE GITHUB
 # ==============================================================================
-# IMPORTANTE: Reemplaza 'TU_USUARIO' y 'TU_REPOSITORIO' por tus datos reales de GitHub.
-# Asegúrate de que los nombres de los archivos (logo.png, fondo.jpg) coincidan exactamente.
+USER_GITHUB = "lloaizasaav1-sudo"
+REPO_GITHUB = "Distribucion-de-Planta-CASAENZ"
 
-USER_GITHUB = "TU_USUARIO"
-REPO_GITHUB = "TU_REPOSITORIO"
-
+# Rutas absolutas en formato Raw para enlazar directamente tus archivos subidos
 URL_LOGO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/logo.png"
 URL_FONDO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/fondo.jpg"
 
@@ -46,7 +44,7 @@ st.markdown(f"""
 # SIDEBAR / NAVEGACIÓN
 # ==============================================================================
 with st.sidebar:
-    # Desplegar el Logo de la Empresa en la parte superior del menú
+    # Desplegar el Logo de la Empresa en la parte superior del menú lateral
     st.image(URL_LOGO, caption="☕ Café Artesanal CASAENZ", use_container_width=True)
     st.markdown("---")
     st.markdown("### 📋 Navegación del Proyecto")
@@ -76,13 +74,13 @@ if opcion == "0. Introducción y Concepto":
     with col1:
         st.subheader("☕ Propuesta de Valor")
         st.write("""
-        **Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**. 
-        Garantiza una experiencia sensorial auténtica mediante granos seleccionados y procesos tradicionales de producción.
+        **Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**, 
+        que busca ofrecer una experiencia sensorial auténtica a través de granos cuidadosamente seleccionados y procesos tradicionales de producción.
         """)
         
         st.subheader("🎯 Brecha de Mercado")
         st.write("""
-        Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.
+        Satisface la necesidad creciente de los consumidores por productos auténticos, de alta calidad y con identidad de origen, combatiendo el marketing engañoso de marcas masivas.
         """)
     
     with col2:
@@ -100,7 +98,7 @@ if opcion == "0. Introducción y Concepto":
 # ==============================================================================
 elif opcion == "1. Factores Críticos de Localización":
     st.header("📌 1. Factores Críticos de Localización")
-    st.write("Para localizar la planta y los centros de operaciones se evaluaron 6 factores críticos prioritarios:")
+    st.write("Para localizar la planta y los centros de operaciones se evaluaron los factores críticos prioritarios organizados en la planeación:")
     
     factores = {
         "Proximidad a Proveedores": "Asegura la frescura del grano (café pergamino de Yotoco, Tuluá, Ginebra) y reduce costos de transporte de entrada.",
