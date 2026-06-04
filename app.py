@@ -13,32 +13,42 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# CONFIGURACIÓN DE ESTILOS LIMPIOS (SIN NINGÚN FONDO PERSONALIZADO)
+# PERSONALIZACIÓN DE FONDO Y LOGO (DISEÑO VISUAL AVANZADO)
 # ==============================================================================
-# Nota: Puedes cambiar la URL por el enlace directo de tu propio logo si lo requieres
+# Nota: Puedes cambiar las URLs por los enlaces directos de tus propias imágenes
 URL_LOGO = "https://github.com/lloaizasaav1-sudo/Distribucion-de-Planta-CASAENZ/blob/main/logo.png" 
 
-st.markdown("""
+
+st.markdown(f"""
     <style>
-    /* Títulos y textos estilizados con colores oscuros de alta legibilidad */
-    .main-title { font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }
-    .subtitle { font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }
-    .section-header { color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }
+    /* Fondo personalizado para toda la aplicación con opacidad para lectura clara */
+    .stApp {{
+        background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(245, 235, 224, 0.95)), 
+                    url("{URL_FONDO}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }}
     
-    /* Tarjetas decorativas para KPI con fondo blanco y texto de alta visibilidad */
-    .kpi-card {
+    /* Títulos y textos estilizados */
+    .main-title {{ font-size:42px !important; font-weight: bold; color: #000000; text-align: center; margin-bottom: 5px; }}
+    .subtitle {{ font-size:20px !important; text-align: center; color: #000000; margin-bottom: 30px; }}
+    .section-header {{ color: #000000; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
+    
+    /* Tarjetas decorativas para KPI */
+    .kpi-card {{
         background-color: white;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
         border-left: 5px solid #8B5A2B;
         text-align: center;
-    }
+    }}
     </style>
 """, unsafe_allow_html=True)
 
 # ==============================================================================
-# SIDEBAR / NAVEGACIÓN (CON TU LOGO)
+# SIDEBAR / NAVEGACIÓN
 # ==============================================================================
 with st.sidebar:
     # Desplegar el Logo de la Empresa en la parte superior del menú
@@ -219,7 +229,7 @@ elif opcion == "5. Distribución de Planta (WD)":
     st.metric("Factor WD Total Semanal", f"{df_wd['Esfuerzo WD (kg·m)'].sum():,} kg·m/semana")
 
 # ==============================================================================
-# PÁGINA 6: BALANCEO DE LÍNEA Y ASIGNACIÓN
+# PÁGINA 6: BALANCEO DE LÍNEA Y ASIGNACIÓN (SITUACIÓN RESUELTA)
 # ==============================================================================
 elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     st.header("⚡ 6. Ingeniería de Métodos: Balanceo de Líneas de Producción")
@@ -252,9 +262,11 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     st.dataframe(df_tareas, use_container_width=True)
     
     tiempo_total_operacion = df_tareas["Tiempo (seg)"].sum()
+    
+    # Cálculos Teóricos de Ingeniería
     min_teorico = int(np.ceil(tiempo_total_operacion / 90))
     
-    # Asignación Heurística de Puestos Realizada
+    # Asignación Heurística de Puestos Realizada (Regla de Mayor Tiempo de Tarea)
     st.subheader("🛠️ 2. Diseño Estructural de los Puestos de Trabajo (Asignación Óptima)")
     st.write("Aplicando las restricciones de precedencia y cuidando no exceder el $T_c = 90$ segundos por puesto, la configuración ideal es:")
     
@@ -266,7 +278,7 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     df_puestos["Tiempo de Ocio (seg)"] = 90 - df_puestos["Tiempo de Ciclo Real (seg)"]
     st.dataframe(df_puestos, use_container_width=True)
     
-    # Indicadores de Desempeño
+    # Indicadores de Desempeño Económico-Operativo
     st.subheader("📈 3. Indicadores de Eficiencia del Balanceo")
     
     n_estaciones = len(df_puestos)
@@ -312,6 +324,7 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     El **Puesto 2 (Tostión)** es el cuello de botella físico del sistema productivo con 85 segundos. 
     Contamos con una excelente eficiencia operativa del **79.17%**, minimizando costos de mano de obra ocio.
     """)
+    
     # ==============================================================================
 # PÁGINA: CONCLUSIONES GENERALES DEL PROYECTO
 # ==============================================================================
