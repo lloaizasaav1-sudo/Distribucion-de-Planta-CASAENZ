@@ -313,7 +313,7 @@ elif opcion == "🎓 Conclusiones Generales":
             Finalmente, se concluye que la configuración propuesta para la planta y la red de suministro de Café Artesanal CASAENZ constituye una alternativa adecuada para 
             soportar el desarrollo y expansión del negocio, proporcionando una base sólida para futuras decisiones relacionadas con la capacidad productiva, 
             distribución logística y optimización de procesos. La aplicación de metodologías propias de la Ingeniería Industrial permitió transformar 
-            información en decisiones estratégicas, demostrando la importancia de la planeación y el análisis técnico en el diseño de sistemas productivos modernos.
+            información en decisiones estratégicas, demonstrating la importancia de la planeación y el análisis técnico en el diseño de sistemas productivos modernos.
         </p>
     </div>
     """, unsafe_allow_html=True)
