@@ -79,34 +79,10 @@ if opcion == "0. Introducción y Concepto":
     col1, col2 = st.columns([1, 1])
     with col1:
         st.subheader("☕ Propuesta de Valor")
-        st.write("""
-        **Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**. 
-        Garantiza una experiencia sensorial auténtica mediante granos seleccionados y procesos tradicionales, alejados de la masificación industrial.
-        """)
+        st.write("**Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**. Garantiza una experiencia sensorial auténtica mediante granos seleccionados y procesos tradicionales, alejados de la masificación industrial.")
         
         st.subheader("🎯 Brecha de Mercado")
-        st.write("""
-        Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.
-        """)
+        st.write("Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.")
     
     with col2:
-        st.info("""
-### 🏭 Objetivos Estratégicos de la Exposición
-Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa:
-* Localización macro y micro industrial.
-* Modelación matemática de transporte.
-* Distribución física y cálculo de esfuerzos de manejo de materiales ($W_D$).
-* Balanceo óptimo de la línea de producción.
-""")
-
-# ==============================================================================
-# PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
-# ==============================================================================
-elif opcion == "1. Factores Críticos de Localización":
-    st.header("📌 1. Factores Críticos de Localización")
-    st.write("Para localizar la planta y los centros de operaciones se evaluaron 6 factores críticos prioritarios:")
-    
-    factores = {
-        "Proximidad a Proveedores": "Asegura la frescura del grano (café pergamino de Yotoco, Tuluá, Ginebra) y reduce costos de transporte de entrada.",
-        "Infraestructura Vial": "Conexión directa con los corredores logísticos principales del Valle del Cauca para mitigar tiempos muertos.",
-        "Cercanía al Mercado": "Acc
+        st.info("### 🏭 Objetivos Estratégicos de la Exposición\nEste aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico
