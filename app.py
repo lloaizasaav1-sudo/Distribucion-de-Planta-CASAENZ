@@ -144,14 +144,14 @@ with tabs[1]:
 
         fig, ax = plt.subplots(figsize=(10, 5))
         
-        # Líneas de las ciudades con marcadores específicos en los extremos como tu Excel
+        # Líneas de las ciudades con marcadores específicos en los extremos
         ax.plot(q_values, costo_cali, label="Cali", color="#1f4e79", linewidth=2.5, marker='o', markevery=[0, -1])
         ax.plot(q_values, costo_palmira, label="Palmira", color="#ed7d31", linewidth=2.5, marker='o', markevery=[0, -1])
         ax.plot(q_values, costo_tulua, label="Tulua", color="#1e6b27", linewidth=2.5, marker='o', markevery=[0, -1])
         
-        # Líneas verticales de los Puntos de Equilibrio (Cali-Palmira y Palmira-Tuluá)
-        ax.axvline(x=10000, color="#00a2e8", linestyle="-", linewidth=2.5, label="Cali-Palmira", marker='o', markevery=[0, -1])
-        ax.axvline(x=18750, color="#a32cc4", linestyle="-", linewidth=2.5, label="Palmira - Tuluá", marker='o', markevery=[0, -1])
+        # Líneas verticales de los Puntos de Equilibrio
+        ax.axvline(x=10000, color="#00a2e8", linestyle="-", linewidth=2.5, label="Cali-Palmira")
+        ax.axvline(x=18750, color="#a32cc4", linestyle="-", linewidth=2.5, label="Palmira - Tuluá")
 
         # Formateo estético igual al de tu imagen
         ax.set_title("Punto de Equilibrio", fontsize=16, pad=15, color="#595959")
@@ -159,11 +159,12 @@ with tabs[1]:
         ax.set_ylim(-50000, 1400000)
         
         # Formatear el eje Y con signo de pesos como tu Excel
-        ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)).replace(",", ".")))
         ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: f"${int(x):,}".replace(",", ".")))
         
         ax.grid(True, color="#e0e0e0", linestyle="-")
-        ax.legend(loc="upper decimal", bbox_to_anchor=(0.5, -0.15), ncol=5, frameon=False, fontsize=11)
+        
+        # ESTA ES LA LÍNEA QUE ARREGLA EL ERROR
+        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=5, frameon=False, fontsize=11)
         
         # Mostrar gráfica en Streamlit
         st.pyplot(fig)
