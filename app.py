@@ -85,4 +85,42 @@ if opcion == "0. Introducción y Concepto":
         st.write("Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.")
     
     with col2:
-        st.info("### 🏭 Objetivos Estratégicos de la Exposición\nEste aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico
+        st.info("""
+        ### 🏭 Objetivos Estratégicos de la Exposición
+        Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa:
+        
+        * Localización macro y micro industrial.
+        * Modelación matemática de transporte.
+        * Distribución física y cálculo de esfuerzos de manejo de materiales ($W_D$).
+        * Balanceo óptimo de la línea de producción.
+        """)
+
+# ==============================================================================
+# PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
+# ==============================================================================
+elif opcion == "1. Factores Críticos de Localización":
+    st.header("📌 1. Factores Críticos de Localización")
+    st.write("Para localizar la planta y los centros de operaciones se evaluaron 6 factores críticos prioritarios:")
+    
+    factores = {
+        "Proximidad a Proveedores": "Asegura la frescura del grano (café pergamino de Yotoco, Tuluá, Ginebra) y reduce costos de transporte de entrada.",
+        "Infraestructura Vial": "Conexión directa con los corredores logísticos principales del Valle del Cauca para mitigar tiempos muertos.",
+        "Cercanía al Mercado": "Acceso rápido a los principales centros de consumo urbano del departamento (Cali, Palmira, Buga).",
+        "Costos Operativos": "Evaluación del impacto financiero en arriendos, servicios públicos, impuestos locales y mano de obra.",
+        "Disponibilidad de Mano de Obra": "Acceso a personal operativo capacitado en técnicas de producción, tostión y empaque.",
+        "Seguridad y Entorno Comercial": "Mitigación de riesgos operacionales y fomento de alianzas estratégicas regionales."
+    }
+    
+    for f, desc in factores.items():
+        with st.expander(f"🔹 {f}"):
+            st.write(desc)
+
+# ==============================================================================
+# PÁGINA 2: TÉCNICAS DE LOCALIZACIÓN
+# ==============================================================================
+elif opcion == "2. Técnicas de Localización":
+    st.header("🧮 2. Técnicas de Localización Aplicadas")
+    
+    tab1, tab2, tab3 = st.tabs(["Costo-Volumen-Utilidad", "Calificación de Factores", "Centro de Gravedad"])
+    
+    with tab1:
