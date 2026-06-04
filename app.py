@@ -13,30 +13,35 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# 🛠️ CONFIGURACIÓN AUTOMÁTICA DE IMÁGENES DESDE TU REPOSITORIO DE GITHUB
+# 🛠️ CONFIGURACIÓN AUTOMÁTICA DEL LOGO DESDE TU REPOSITORIO DE GITHUB
 # ==============================================================================
 USER_GITHUB = "lloaizasaav1-sudo"
 REPO_GITHUB = "Distribucion-de-Planta-CASAENZ"
 
-# Rutas absolutas en formato Raw para enlazar directamente tus archivos subidos
+# Ruta en formato Raw para enlazar directamente tu logo subido
 URL_LOGO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/logo.png"
-URL_FONDO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/fondo.jpg"
 
 st.markdown(f"""
     <style>
-    /* Fondo personalizado para toda la aplicación con opacidad para lectura clara */
+    /* FONDO DE COLOR SÓLIDO LIMPIO (Eliminada la imagen de fondo para máxima legibilidad) */
     .stApp {{
-        background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(245, 235, 224, 0.95)), 
-                    url("{URL_FONDO}");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+        background-color: #FDFBF7; /* Un tono crema/arena muy suave que no cansa la vista */
     }}
     
     /* Títulos y textos estilizados */
     .main-title {{ font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }}
     .subtitle {{ font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }}
     .section-header {{ color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
+    
+    /* Estilos para las tarjetas de conclusión */
+    .conclusion-card {{
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 5px solid #D4A373;
+        margin-bottom: 15px;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -57,7 +62,8 @@ with st.sidebar:
             "3. Red de Suministros y Modelo Matemático",
             "4. Simulación en FlexSim",
             "5. Distribución de Planta (WD)",
-            "6. Balanceo de Línea y Asignación de Puestos"
+            "6. Balanceo de Línea y Asignación de Puestos",
+            "7. Conclusión General del Proyecto"
         ]
     )
     st.sidebar.markdown("---")
@@ -222,7 +228,7 @@ elif opcion == "5. Distribución de Planta (WD)":
     st.metric("Factor WD Total Semanal", f"{df_wd['Esfuerzo WD (kg·m)'].sum():,} kg·m/semana")
 
 # ==============================================================================
-# PÁGINA 6: BALANCEO DE LÍNEA Y ASIGNACIÓN (SITUACIÓN RESUELTA)
+# PÁGINA 6: BALANCEO DE LÍNEA Y ASIGNACIÓN
 # ==============================================================================
 elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     st.header("⚡ 6. Ingeniería de Métodos: Balanceo de Líneas de Producción")
@@ -309,9 +315,45 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
         yaxis_title="Segundos"
     )
     st.plotly_chart(fig_linea, use_container_width=True)
+
+# ==============================================================================
+# PÁGINA 7: NUEVA SECCIÓN - CONCLUSIÓN GENERAL DEL PROYECTO
+# ==============================================================================
+elif opcion == "7. Conclusión General del Proyecto":
+    st.header("🎓 7. Conclusión General del Proyecto Integrador")
+    st.markdown("### 🎯 Diagnóstico Estratégico e Implicaciones de Ingeniería")
     
-    st.success("""
-    💡 **Conclusión del Balanceo:** La línea quedó balanceada con **4 estaciones** de trabajo estables. 
-    El **Puesto 2 (Tostión)** es el cuello de botella físico del sistema productivo con 85 segundos. 
-    Contamos con una excelente eficiencia operativa del **79.17%**, minimizando costos de mano de obra ocio.
-    """)
+    st.markdown("""
+    <div class="conclusion-card">
+        <h4>1. Viabilidad de Localización y Sostenibilidad Logística</h4>
+        <p>A través de la triangulación metodológica (Costo-Volumen-Utilidad, Calificación de Factores y Centro de Gravedad), 
+        se demostró que la macro-localización en el corredor del <b>Valle del Cauca (Cali/Palmira)</b> optimiza el balance de la red de suministros. 
+        Esta ubicación mitiga el impacto de los fletes de transporte, asegura una respuesta ágil a la fluctuación de la demanda de los centros urbanos 
+        y aprovecha la cercanía clave con los proveedores de café pergamino en Yotoco, Tuluá y Ginebra.</p>
+    </div>
+    
+    <div class="conclusion-card">
+        <h4>2. Eficiencia del Diseño Espacial ($W_D$) y Flujo de Proceso</h4>
+        <p>El plano de bloques desarrollado bajo una distribución por producto, en sinergia con el análisis del <b>Diagrama de Hilos</b>, 
+        logró una reducción drástica en los recorridos innecesarios de materiales dentro de la planta. 
+        El indicador de esfuerzo calculado <b>Factor Carga-Distancia ($W_D$)</b> funge como línea base de eficiencia, asegurando un flujo continuo, 
+        minimizando el riesgo de contaminación cruzada del grano y validando la configuración física antes de incurrir en costos de infraestructura.</p>
+    </div>
+    
+    <div class="conclusion-card">
+        <h4>3. Sincronización de Operaciones y Balanceo de Líneas</h4>
+        <p>El estudio de tiempos y precedencias determinó que el proceso artesanal cuenta con una operación restrictiva o cuello de botella en la <b>Tostión (85 segundos)</b>. 
+        No obstante, la estructuración heurística en <b>4 puestos de trabajo óptimos</b> permitió alcanzar una robusta <b>Eficiencia Global de Línea del 79.17%</b>. 
+        Esto garantiza que la capacidad instalada no solo es técnicamente estable, sino capaz de soportar la tasa de producción deseada de 320 unidades diarias sin sobrecargar la mano de obra.</p>
+    </div>
+    
+    <div class="conclusion-card">
+        <h4>4. Simulación y Toma de Decisiones en la Ingeniería Industrial</h4>
+        <p>En conclusión, el modelado matemático combinado con la simulación virtual en <b>FlexSim</b> demuestra que las decisiones metodológicas de diseño de planta 
+        tienen un impacto directo e inmediato en la productividad, costos operativos y nivel de servicio de <b>Café Artesanal CASAENZ</b>. 
+        La ingeniería industrial aplicada transformó datos empíricos en una propuesta de distribución de planta altamente competitiva, escalable y financieramente viable.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Detalle estético final para cerrar la exposición
+    st.balloons()
