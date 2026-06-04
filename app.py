@@ -109,8 +109,27 @@ if opcion == "0. Introducción y Concepto":
     with col1:
         st.subheader("☕ Propuesta de Valor")
         st.write("""
-        **Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**, 
+        Café Artesanal CASAENZ es un café colombiano Premium cultivado y tostado de manera artesanal en el Valle del Cauca, 
         que busca ofrecer una experiencia sensorial auténtica a través de granos cuidadosamente seleccionados y procesos tradicionales de producción.
         """)
         
-        st.subheader("🎯 Brecha de
+        st.subheader("🎯 Brecha de Mercado")
+        st.write("""
+        Satisface la necesidad creciente de los consumidores por productos auténticos, de alta calidad y con identidad de origen, combatiendo el marketing engañoso de marcas masivas.
+        """)
+    
+    with col2:
+        st.info("""
+        ### 🏭 Objetivos Estratégicos de la Exposición
+        Este aplicativo web interactivo presenta las decisiones de Ingeniería Industrial tomadas para el diseño del sistema logístico y productivo de la empresa:
+        * Localización macro y micro industrial.
+        * Modelación matemática de transporte.
+        * Distribución física y cálculo de esfuerzos de manejo de materiales (W_D).
+        * Balanceo óptimo de la línea de producción.
+        """)
+
+# ==============================================================================
+# PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
+# ==============================================================================
+elif opcion == "1. Factores Críticos de Localización":
+    st.header
