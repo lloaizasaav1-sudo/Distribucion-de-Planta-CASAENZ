@@ -92,15 +92,6 @@ if opcion == "0. Introducción y Concepto":
         Satisface el nicho de consumidores que buscan cafés de especialidad de origen regional real, combatiendo el marketing engañoso de marcas masivas que usan el término 'artesanal' sin serlo.
         """)
     
-    with col2:
-        st.info("""
-        ### 🏭 Objetivos Estratégicos de la Exposición
-        Este aplicativo web interactivo presenta las decisiones de **Ingeniería Industrial** tomadas para el diseño del sistema logístico y productivo de la empresa:
-        * Localización macro y micro industrial.
-        * Modelación matemática de transporte.
-        * Distribución física y cálculo de esfuerzos de manejo de materiales ($W_D$).
-        * Balanceo óptimo de la línea de producción.
-        """)
 
 # ==============================================================================
 # PÁGINA 1: FACTORES CRÍTICOS DE LOCALIZACIÓN
