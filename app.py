@@ -13,11 +13,16 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# PERSONALIZACIÓN DE FONDO Y LOGO (DISEÑO VISUAL AVANZADO)
+# ⚠️ CONFIGURACIÓN DE TUS IMÁGENES DESDE GITHUB
 # ==============================================================================
-# Nota: Puedes cambiar las URLs por los enlaces directos de tus propias imágenes
-URL_LOGO = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=200&auto=format&fit=crop" 
-URL_FONDO = "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1600&auto=format&fit=crop"
+# IMPORTANTE: Reemplaza 'TU_USUARIO' y 'TU_REPOSITORIO' por tus datos reales de GitHub.
+# Asegúrate de que los nombres de los archivos (logo.png, fondo.jpg) coincidan exactamente.
+
+USER_GITHUB = "TU_USUARIO"
+REPO_GITHUB = "TU_REPOSITORIO"
+
+URL_LOGO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/logo.png"
+URL_FONDO = f"https://raw.githubusercontent.com/{USER_GITHUB}/{REPO_GITHUB}/main/fondo.jpg"
 
 st.markdown(f"""
     <style>
@@ -34,16 +39,6 @@ st.markdown(f"""
     .main-title {{ font-size:42px !important; font-weight: bold; color: #4A3018; text-align: center; margin-bottom: 5px; }}
     .subtitle {{ font-size:20px !important; text-align: center; color: #705335; margin-bottom: 30px; }}
     .section-header {{ color: #5C3A21; border-bottom: 2px solid #D4A373; padding-bottom: 5px; margin-top: 20px; }}
-    
-    /* Tarjetas decorativas para KPI */
-    .kpi-card {{
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-        border-left: 5px solid #8B5A2B;
-        text-align: center;
-    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -82,7 +77,7 @@ if opcion == "0. Introducción y Concepto":
         st.subheader("☕ Propuesta de Valor")
         st.write("""
         **Café Artesanal CASAENZ** es un café colombiano Premium cultivado y tostado de manera artesanal en el **Valle del Cauca**. 
-        Garantiza una experiencia sensorial auténtica mediante granos seleccionados y procesos tradicionales, alejados de la masificación industrial.
+        Garantiza una experiencia sensorial auténtica mediante granos seleccionados y procesos tradicionales de producción.
         """)
         
         st.subheader("🎯 Brecha de Mercado")
@@ -262,11 +257,9 @@ elif opcion == "6. Balanceo de Línea y Asignación de Puestos":
     st.dataframe(df_tareas, use_container_width=True)
     
     tiempo_total_operacion = df_tareas["Tiempo (seg)"].sum()
-    
-    # Cálculos Teóricos de Ingeniería
     min_teorico = int(np.ceil(tiempo_total_operacion / 90))
     
-    # Asignación Heurística de Puestos Realizada (Regla de Mayor Tiempo de Tarea)
+    # Asignación Heurística de Puestos Realizada
     st.subheader("🛠️ 2. Diseño Estructural de los Puestos de Trabajo (Asignación Óptima)")
     st.write("Aplicando las restricciones de precedencia y cuidando no exceder el $T_c = 90$ segundos por puesto, la configuración ideal es:")
     
